@@ -1,0 +1,81 @@
+using System;
+
+public class Plant
+{
+   public string Name;
+   public string Type; // e.g. Tree, Shrub, Flower, etc.
+   public double Height;
+   public bool IsEdible;
+   public int AgeInYears;
+   public string NativeRegion;
+   public double MaintenanceCost;
+
+   public double MaintenanceCostPerYear
+   {
+       get { return MaintenanceCost / AgeInYears; }
+   }
+}
+
+class Program
+{
+   static void Main(string[] args)
+   {
+       // 1) Ввести кількість об'єктів для масиву cntPlants
+       Console.Write("Введіть кількість рослин: ");
+       int cntPlants = int.Parse(Console.ReadLine());
+
+       // 2) Оголосити і створити масив arrPlants
+       Plant[] arrPlants = new Plant[cntPlants];
+
+       // 3) У циклі ввести дані для всіх рослин масиву, задавши значення всіх полів
+       for (int i = 0; i < cntPlants; i++)
+       {
+           Console.Write("Введіть назву рослини: ");
+           string name = Console.ReadLine();
+           Console.Write("Введіть тип рослини (дерево, кущ, квітка тощо): ");
+           string type = Console.ReadLine();
+           Console.Write("Введіть висоту рослини (метри): ");
+           double height = double.Parse(Console.ReadLine());
+           Console.Write("Чи є ця рослина їстівною? (y-так, n-ні): ");
+           bool isEdible = Console.ReadKey().Key == ConsoleKey.Y;
+           Console.WriteLine();
+           Console.Write("Введіть вік рослини (роки): ");
+           int ageInYears = int.Parse(Console.ReadLine());
+           Console.Write("Введіть регіон походження рослини: ");
+           string nativeRegion = Console.ReadLine();
+           Console.Write("Введіть річну вартість догляду за рослиною: ");
+           double maintenanceCost = double.Parse(Console.ReadLine());
+           Console.WriteLine();
+
+           Plant thePlant = new Plant();
+           thePlant.Name = name;
+           thePlant.Type = type;
+           thePlant.Height = height;
+           thePlant.IsEdible = isEdible;
+           thePlant.AgeInYears = ageInYears;
+           thePlant.NativeRegion = nativeRegion;
+           thePlant.MaintenanceCost = maintenanceCost;
+
+           arrPlants[i] = thePlant;
+       }
+
+       // 4) У циклі вивести дані всіх об'єктів масиву на екран
+       foreach (Plant plant in arrPlants)
+       {
+           Console.WriteLine();
+           Console.WriteLine(" ");
+           Console.WriteLine("Дані про рослину:");
+           Console.WriteLine(" ");
+           Console.WriteLine("Назва: " + plant.Name);
+           Console.WriteLine("Тип: " + plant.Type);
+           Console.WriteLine("Висота: " + plant.Height + " метрів");
+           Console.WriteLine("Їстівна: " + (plant.IsEdible ? "Так" : "Ні"));
+           Console.WriteLine("Вік: " + plant.AgeInYears + " років");
+           Console.WriteLine("Регіон походження: " + plant.NativeRegion);
+           Console.WriteLine("Вартість догляду: " + plant.MaintenanceCost.ToString("0.00"));
+           Console.WriteLine("Вартість догляду за рік: " + plant.MaintenanceCostPerYear.ToString("0.00"));
+       }
+
+       Console.ReadKey();
+   }
+}
